@@ -54,6 +54,6 @@ public class InterestCalculator {
     }
 
     private boolean checkFullYear(Calendar startCalendar, Calendar endCalendar){
-        return (endCalendar.get(Calendar.DAY_OF_YEAR) < startCalendar.get(Calendar.DAY_OF_YEAR))
+        return (endCalendar.get(Calendar.DAY_OF_YEAR) < startCalendar.get(Calendar.DAY_OF_YEAR));
     }
 }
