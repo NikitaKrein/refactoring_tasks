@@ -35,7 +35,7 @@ public class InterestCalculator {
                 * durationSinceStartDateInYears(accountDetails.getStartDate()) * percent / 100;
     }
 
-    private int checkSenior(AccountDetails accountDetails){
+    private boolean checkSenior(AccountDetails accountDetails){
         return (AGE <= accountDetails.getAge());
     }
 
