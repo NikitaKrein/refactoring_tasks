@@ -17,8 +17,8 @@ public abstract class UserAuthenticator implements UserService {
             sessionManager.setCurrentUser(user);
             return user;
         }
-        return null;
+        else {
+            throw new NullPointerException("User not found");
+        }
     }
-
-
 }

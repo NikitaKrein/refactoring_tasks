@@ -14,15 +14,29 @@ public class InterestCalculator {
 
 
     public BigDecimal calculateInterest(AccountDetails accountDetails) {
+        double interest = 0;
         if (isAccountStartedAfterBonusAge(accountDetails)) {
-            return interest(accountDetails);
-        } else {
-            return BigDecimal.ZERO;
+            if (checkSenior(accountDetails)){
+                interest = calculateValueOfInterest(accountDetails, SENIOR_PERCENT);
+            }
+            else {
+                interest = calculateValueOfInterest(accountDetails, INTEREST_PERCENT);
+            }
         }
+        return BigDecimal.valueOf(interest);
     }
 
     private boolean isAccountStartedAfterBonusAge(AccountDetails accountDetails) {
         return durationBetweenDatesInYears(accountDetails.getBirth(), accountDetails.getStartDate()) > BONUS_AGE;
+    }
+
+    private double calculateValueOfInterest(AccountDetails accountDetails, double percent){
+        double interest = accountDetails.getBalance().doubleValue()
+                * durationSinceStartDateInYears(accountDetails.getStartDate()) * percent / 100;
+    }
+
+    private int checkSenior(AccountDetails accountDetails){
+        return (AGE <= accountDetails.getAge());
     }
 
     private int durationBetweenDatesInYears(Date from, Date to) {
@@ -32,36 +46,14 @@ public class InterestCalculator {
         endCalendar.setTime(to);
 
         int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
-        if (endCalendar.get(Calendar.DAY_OF_YEAR) < startCalendar.get(Calendar.DAY_OF_YEAR))
-            return diffYear - 1;
-        return diffYear;
-    }
-
-    private BigDecimal interest(AccountDetails accountDetails) {
-        double interest = 0;
-        if (isAccountStartedAfterBonusAge(accountDetails)) {
-            if (AGE <= accountDetails.getAge()) {
-                //interest = (PrincipalAmount * DurationInYears * AnnualInterestRate) / 100
-                interest = accountDetails.getBalance().doubleValue()
-                        * durationSinceStartDateInYears(accountDetails.getStartDate()) * SENIOR_PERCENT / 100;
-            } else {
-                interest = accountDetails.getBalance().doubleValue()
-                        * durationSinceStartDateInYears(accountDetails.getStartDate()) * INTEREST_PERCENT / 100;
-            }
-        }
-        return BigDecimal.valueOf(interest);
+        return (checkFullYear(startCalendar, endCalendar)) ? (diffYear - 1) : diffYear;
     }
 
     private int durationSinceStartDateInYears(Date startDate) {
-        Calendar startCalendar = new GregorianCalendar();
-        startCalendar.setTime(startDate);
-        Calendar endCalendar = new GregorianCalendar();
-        endCalendar.setTime(new Date());
+        return (durationBetweenDatesInYears(StartDate, new Date()));
+    }
 
-        int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
-        if (endCalendar.get(Calendar.DAY_OF_YEAR) < startCalendar.get(Calendar.DAY_OF_YEAR))
-            return diffYear - 1;
-        return diffYear;
-
+    private boolean checkFullYear(Calendar startCalendar, Calendar endCalendar){
+        return (endCalendar.get(Calendar.DAY_OF_YEAR) < startCalendar.get(Calendar.DAY_OF_YEAR))
     }
 }
