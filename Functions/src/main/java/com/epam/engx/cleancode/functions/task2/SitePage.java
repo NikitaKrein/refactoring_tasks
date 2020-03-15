@@ -32,7 +32,7 @@ public class SitePage {
         String paramsString = "";
         for (Map.Entry<String, String> param : params.entrySet())
             paramsString += "&" + param.getKey() + "=" + param.getValue();
-        return paramsString
+        return paramsString;
     }
 
     private String getAttributes() {

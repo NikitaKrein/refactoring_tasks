@@ -33,7 +33,7 @@ public class RegisterAccountAction {
 
     private boolean validationName(Account account) {
         if (account.getName().length() > MINIMUM_ACCOUNT_NAME_LENGTH) {
-            return true
+            return true;
         } else {
             throw new WrongAccountNameException();
         }
@@ -41,7 +41,7 @@ public class RegisterAccountAction {
 
     private boolean validationPassword(Account account) {
         if (account.getPassword().length() > MINIMUM_PASSWORD_NAME_LENGTH && passwordChecker.validate(password) == OK) {
-            return true
+            return true;
         } else {
             throw new WrongPasswordException();
         }
