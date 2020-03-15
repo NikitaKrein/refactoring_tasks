@@ -40,7 +40,7 @@ public class RegisterAccountAction {
     }
 
     private boolean validationPassword(Account account) {
-        if (account.getPassword().length() > MINIMUM_PASSWORD_NAME_LENGTH && passwordChecker.validate(password) == OK) {
+        if (account.getPassword().length() > MINIMUM_PASSWORD_NAME_LENGTH && passwordChecker.validate(account.getPassword()) == OK) {
             return true;
         } else {
             throw new WrongPasswordException();
