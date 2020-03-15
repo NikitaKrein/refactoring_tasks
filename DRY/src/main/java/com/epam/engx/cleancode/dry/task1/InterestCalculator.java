@@ -50,7 +50,7 @@ public class InterestCalculator {
     }
 
     private int durationSinceStartDateInYears(Date startDate) {
-        return (durationBetweenDatesInYears(StartDate, new Date()));
+        return durationBetweenDatesInYears(startDate, new Date());
     }
 
     private boolean checkFullYear(Calendar startCalendar, Calendar endCalendar){
