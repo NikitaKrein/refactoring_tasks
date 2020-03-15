@@ -31,8 +31,8 @@ public class InterestCalculator {
     }
 
     private double calculateValueOfInterest(AccountDetails accountDetails, double percent){
-        double interest = accountDetails.getBalance().doubleValue()
-                * durationSinceStartDateInYears(accountDetails.getStartDate()) * percent / 100;
+        return (accountDetails.getBalance().doubleValue()
+                * durationSinceStartDateInYears(accountDetails.getStartDate()) * percent / 100);
     }
 
     private boolean checkSenior(AccountDetails accountDetails){
